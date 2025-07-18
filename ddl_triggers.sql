@@ -4,18 +4,6 @@
 
 -- 1.ActualizarTotalAlquileresEmpleado: Al registrar un alquiler, actualiza el total de alquileres gestionados por el empleado correspondiente.
 
-DELIMITER $$
-
-CREATE TRIGGER ActualizarTotalAlquileresEmpleado
-AFTER INSERT ON alquiler
-FOR EACH ROW
-BEGIN
-  UPDATE empleado
-  SET total_alquileres = IFNULL(total_alquileres, 0) + 1
-  WHERE id_empleado = NEW.id_empleado;
-END$$
-
-DELIMITER ;
 
 
 -- 2.AuditarActualizacionCliente: Cada vez que se modifica un cliente, registra el cambio en una tabla de auditoría.
